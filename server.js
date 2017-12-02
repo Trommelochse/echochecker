@@ -15,6 +15,10 @@ app.get("/", function (req, res) {
   res.render('index', {title: 'Echo Campaign QA tool'});
 });
 
+app.get("/analyze", function (req, res) {
+  res.send(req.query);
+});
+
 
 // listen for reqs :)
 var listener = app.listen(app.get('port'), function () {
