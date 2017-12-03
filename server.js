@@ -1,6 +1,8 @@
 var express = require('express');
 var path = require('path');
 var hbs = require('express-handlebars');
+var mw_validate = require('./middleware/validate.js');
+var analyzeController = require('./analyze/analyzeController.js');
 
 var app = express();
 
@@ -10,17 +12,18 @@ app.set('view engine', 'hbs');
 app.set('port', 3003);
 
 app.use(express.static('public'));
+app.use('/analyze', function(req, res, next) {
+  mw_validate(req, res, next);
+});
 
 app.get("/", function (req, res) {
-  res.render('index', {title: 'Echo Campaign QA tool'});
+  res.render('index');
 });
 
 app.get("/analyze", function (req, res) {
-  res.send(req.query);
+  analyzeController.getResults(req, res);
 });
 
-
-// listen for reqs :)
 var listener = app.listen(app.get('port'), function () {
   console.log('App listening on port ' + listener.address().port);
 });
