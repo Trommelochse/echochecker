@@ -1,27 +1,20 @@
 var axios = require('axios');
 var lib = require('./lib');
 
-function axiosFromUrls (urls) {
-  const temp = [];
-  for (let url in urls) {
-    temp.push(axios.get(url));
-  }
-  return temp
-}
-
 const getResults = function(req, res) {
   const defaultCampaign = res.locals.defaultCampaign;
-  const languageUrls = lib.getLanguageUrls(defaultCampaign);
-  const promises = lib.getPromises(languageUrls);
+  const apiUris = lib.getApiUris(defaultCampaign);
+  const promiseStack = lib.getPromiseStack(apiUris);
 
-  axios.all(promises)
+  axios.all(promiseStack)
     .then(axios.spread(function (...args) {
       const campaigns = args.map(campaign => campaign.data);
       campaigns.unshift(defaultCampaign);
-      res.send(campaigns);
+      const results = lib.analyzeAll(campaigns);
+      res.send(results);
     }))
-    .catch(err => res.render('error', {message: err}))
-}
+    .catch(err => res.render('error', {message: err}));
+};
 
 module.exports = {
   getResults
