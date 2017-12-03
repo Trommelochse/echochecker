@@ -2,40 +2,77 @@
   <div class="column column-75">
     <form action="analyze" method="get">
       <fieldset>
-        <label for="echoCampaignId">Echo Campaign ID </label>
-        <input type="text" placeholder="i.e. 11395" name="echoCampaignId" id="echoCampaignId">
-      <label>Promotion Domain</label>
-      <div class="row">
-        <div class="column column-20" style="display: flex;">
-          <select>
-            <option value="https://">https://</option>
-          </select>
+        <div class="row">
+          <div class="column">
+            <label for="echoCampaignId">Echo Campaign ID</label>
+            <input type="text" placeholder="i.e. 11395" name="echoCampaignId" id="echoCampaignId">
+          </div>
         </div>
-        <div class="column column-33">
-          <select name="subdomain" id="subdomain">
-            <option value="promotions.">promotions.</option>
-            <option value="in.">in.</option>
-            <option value="kampagner.">kampagner.</option>
-          </select>
+        <div class="row">
+          <div class="column">
+            <label>Promotion Domain</label>
+          </div>
         </div>
-        <div class="column column-">
-          <select name="brand" id="brand">
-            <option value="betsson">betsson</option>
-            <option value="nordicbet">nordicbet</option>
-            <option value="betsafe">betsafe</option>
-          </select>
+        <div class="row">
+          <div class="column column-20" style="display: flex;">
+            <select>
+              <option value="https://">https://</option>
+            </select>
+          </div>
+          <div class="column column-33">
+            <select name="subdomain" id="subdomain">
+              <option value="promotions.">promotions.</option>
+              <option value="in.">in.</option>
+              <option value="kampagner.">kampagner.</option>
+            </select>
+          </div>
+          <div class="column">
+            <select name="brand" id="brand">
+              <option value="betsson">betsson</option>
+              <option value="nordicbet">nordicbet</option>
+              <option value="betsafe">betsafe</option>
+            </select>
+          </div>
+          <div class="column column-20">
+            <select name="topdomain" id="topdomain">
+              <option value=".com">.com</option>
+              <option value=".dk">.dk</option>
+            </select>
+          </div>
         </div>
-        <div class="column column-20">
-          <select name="topdomain" id="topdomain">
-            <option value=".com">.com</option>
-            <option value=".dk">.dk</option>
-          </select>
+        <div class="row">
+          <div class="column column-66">
+            <label for="optInCode">Opt In Code:</label>
+            <input type="text" placeholder="WC2018_RFB_NO" name="optInCode" id="optInCode">
+          </div>
+          <div class="column">
+            <label for="optInCode">Product:</label>
+            <select name="product" id="product">
+              <option value="" default>none</option>
+              <option value="sb">Sportsbook</option>
+              <option value="ca">Casino</option>
+              <option value="lca">Live Casino</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <label for="optInCode">Opt In Code:</label>
-      <input type="text" placeholder="WC2018_RFB_NO" name="optInCode" id="optInCode">
-      <input class="button-primary" type="submit" value="Check Campaign">
-    </fieldset>
+        <div class="row">
+          <div class="column">
+            <input class="button-primary" type="submit" value="Check Campaign" id="button-init">
+          </div>
+        </div>
+      </fieldset>
     </form>
   </div>
+  <div class="overlay-loading">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <div class="spinner-description">The server is checking your campaign.<br>This might take a while...</div>
+    </div>
+  </div>
 </div>
+
+<script type="text/javascript">
+  $('#button-init').on('click', function(ev) {
+    $('.overlay-loading').css('display', 'flex');
+  });
+</script>

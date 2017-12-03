@@ -12,3 +12,43 @@ input.button-primary:hover {
   background-color: #276139;
   border-color: #407A52;
 }
+
+.overlay-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.45);
+  z.index: 100;
+  display: none;
+}
+
+.spinner-container {
+  margin: auto;
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 6px solid #87D37C;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  margin: 60px;
+  animation: spin 1200ms linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
