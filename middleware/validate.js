@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
       })
       .catch(err => {
         res.render('error', {
-          message: 'Seems like your inputs weren\'t correct :)',
+          message: 'Seems like your inputs were not correct',
           buttonText: 'Understood!',
           buttonPath: '/'
         });
