@@ -48,7 +48,6 @@
           <div class="column">
             <label for="optInCode">Product:</label>
             <select name="product" id="product">
-              <option value="startpage">Startpage</option>
               <option value="sb">Sportsbook</option>
               <option value="ca">Casino</option>
               <option value="lca">Live Casino</option>
@@ -72,6 +71,7 @@
 </div>
 
 <script type="text/javascript">
+  console.log('%cHey, I hope you are having a good day!', 'background: #006EB4; color: #fff; font-size: 12px; padding: 4px 10px; text-shadow:1px 1px rgba(0,0,0,0.4)');
   $('#button-init').on('click', function(ev) {
     console.log(ev.target.value);
     $('.overlay-loading').css('display', 'flex');
