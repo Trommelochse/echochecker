@@ -2,15 +2,15 @@ const brandData = {
   betsson: {
     en: {
       ca: {
-        web: 'https://casino.betsson.com/sv/',
+        web: 'https://casino.betsson.com/en',
         mob: 'https://m.betsson.com/en/casino',
       },
       sb: {
-        web: 'https://sportsbook.betsson.com/en/',
+        web: 'https://sportsbook.betsson.com/en',
         mob: 'https://m.betsson.com/en/sportsbook',
       },
       lca: {
-        web: 'https://livecasino.betsson.com/sv/',
+        web: 'https://livecasino.betsson.com/en',
         mob: 'https://m.betsson.com/en/live-casino',
       },
       startpage: {
@@ -20,15 +20,15 @@ const brandData = {
     },
     sv: {
       ca: {
-        web: 'https://casino.betsson.com/sv/',
+        web: 'https://casino.betsson.com/sv',
         mob: 'https://m.betsson.com/sv/casino',
       },
       sb: {
-        web: 'https://sportsbook.betsson.com/sv/',
+        web: 'https://sportsbook.betsson.com/sv',
         mob: 'https://m.betsson.com/sv/odds',
       },
       lca: {
-        web: 'https://livecasino.betsson.com/sv/',
+        web: 'https://livecasino.betsson.com/sv',
         mob: 'https://m.betsson.com/sv/live-casino',
       },
       startpage: {
@@ -38,15 +38,15 @@ const brandData = {
     },
     no: {
       ca: {
-        web: 'https://casino.betsson.com/sv/',
+        web: 'https://casino.betsson.com/no',
         mob: 'https://m.betsson.com/no/casino',
       },
       sb: {
-        web: 'https://sportsbook.betsson.com/no/',
+        web: 'https://sportsbook.betsson.com/no',
         mob: 'https://m.betsson.com/no/odds',
       },
       lca: {
-        web: 'https://livecasino.betsson.com/sv/',
+        web: 'https://livecasino.betsson.com/no',
         mob: 'https://m.betsson.com/no/live-casino',
       },
       startpage: {
@@ -56,15 +56,15 @@ const brandData = {
     },
     fi: {
       ca: {
-        web: 'https://casino.betsson.com/sv/',
+        web: 'https://casino.betsson.com/fi',
         mob: 'https://m.betsson.com/fi/casino',
       },
       sb: {
-        web: 'https://sportsbook.betsson.com/fi/',
+        web: 'https://sportsbook.betsson.com/fi',
         mob: 'https://m.betsson.com/fi/vedonlyonti',
       },
       lca: {
-        web: 'https://livecasino.betsson.com/sv/',
+        web: 'https://livecasino.betsson.com/fi',
         mob: 'https://m.betsson.com/fi/live-casino',
       },
       startpage: {
@@ -226,7 +226,7 @@ const brandData = {
   }
 }
 
-const getBrandUrls = function (settings) {
+const getBrandUrls = settings => {
   const constants = {};
   const brand = brandData[settings.brand];
   constants.webUrl = brand[settings.language][settings.product].web;

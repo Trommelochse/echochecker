@@ -1,13 +1,83 @@
 var axios = require('axios');
+var data = require('../../data/');
 
-const getOptInLinks = function (links) {
-  return links.filter(link => link.ddlFunction === 'JoinCampaign')
+const analyzeDesktopLink = (str, baseUrl, optInCode) => {
+  if (str.indexOf(baseUrl) === 0) {
+    let rest = str.substr(baseUrl.length);
+    rest = rest[0] === '/' ? rest.substr(1) : rest;
+    if (rest === `?action=join&campaign=${optInCode}`) {
+      return {pass: true}
+    }
+    return {err: 'optin'}
+  }
+  return {err: 'base'}
 }
 
-const getLinks = function (elements) {
+const analyzeMobileLink = (str, baseUrl, optInCode) => {
+  if (str.indexOf(baseUrl) === 0) {
+    let rest = str.substr(baseUrl.length);
+    rest = rest[0] === '/' ? rest.substr(1) : rest;
+    if (rest === `?campaign=${optInCode}`) {
+      return {pass: true}
+    }
+    return {err: 'optin'}
+  }
+  return {err: 'base'}
+}
+
+const analyzeNativeLink = (link, optInCode, product) => {
+  if (link.txtCampaignID !== optInCode) {
+    return {err: 'optin'}
+  }
+  if (link.ddlShowFeedback !== 'true') {
+    return {err: 'feedback'}
+  }
+  if (link.ddlSuccessCTA !== "GoToCasinoLobby") {
+    if (product.indexOf('ca') === -1) {
+      return {err: 'lobby'}
+    }
+    return {pass: true}
+  }
+  if (link.ddlSuccessCTA !== "GoToSportsbookLobby") {
+    if (product !== 'sb') {
+      return {err: 'lobby'}
+    }
+    return {pass: true}
+  }
+  return {err: 'unknown'}
+}
+
+const getOptInResults = (links, settings) => {
+  const optInLinks = links.filter(link => link.ddlFunction === 'JoinCampaign');
+  const results = [];
+  for (let i=0; i<optInLinks.length; i++) {
+    const link = optInLinks[i];
+    const result = {
+      dsk: analyzeDesktopLink(
+        link.txtDesktopWebURL,
+        settings.brandUrls.webUrl,
+        settings.optInCode
+      ),
+      mob: analyzeMobileLink(
+        link.txtMobileWebURL,
+        settings.brandUrls.mobUrl,
+        settings.optInCode
+      ),
+      nat: analyzeNativeLink (
+        link,
+        settings.optInCode,
+        settings.product
+      )
+    };
+    results.push(result);
+  }
+  return results;
+}
+
+const getLinks = elements => {
   return elements.map(element => {
     const str = element.settings.hyperlink_url ||
-    element.settings[0].hyperlink_url;
+      element.settings[0].hyperlink_url;
     if (str.indexOf('ddlFunction') !== -1) {
       return JSON.parse(str)
     }
@@ -15,7 +85,7 @@ const getLinks = function (elements) {
   })
 };
 
-const getLinkingElements = function (elements) {
+const getLinkingElements = elements => {
   let temp = elements.filter(element => {
     if (!element.settings.length) {
       const url = element.settings.hyperlink_url;
@@ -28,7 +98,7 @@ const getLinkingElements = function (elements) {
   return temp
 };
 
-const getAllElements = function (rows) {
+const getAllElements = rows => {
   let temp = [];
   for (let i=0; i<rows.length; i++) {
     const row = rows[i];
@@ -42,16 +112,20 @@ const getAllElements = function (rows) {
   return temp
 }
 
-const analyzeCampaign = function (campaign) {
-  const result = {language: campaign.campaign_language};
+const analyzeCampaign = (campaign, settings) => {
+  settings.language = campaign.campaign_language.toLowerCase();
+  settings.brandUrls = data.getBrandUrls(settings);
   const allElements = getAllElements(campaign.body);
   const linkingElements = getLinkingElements(allElements);
   const links = getLinks(linkingElements);
-  const optInLinks = getOptInLinks(links);
-  return optInLinks
+  const optInResults = getOptInResults(links, settings);
+  const result = {
+    optInResults
+  };
+  return result
 };
 
-const getPromiseStack = function (arr) {
+const getPromiseStack = arr => {
   const temp = [];
   for (let i=0; i<arr.length; i++) {
     const fun = axios.get(arr[i]);
@@ -59,8 +133,9 @@ const getPromiseStack = function (arr) {
   }
   return temp
 };
-const getApiUris = function (campaign) {
-  const urls = campaign.campaign_settings.languages.map(function (item) {
+
+const getApiUris = campaign => {
+  const urls = campaign.campaign_settings.languages.map( item => {
     if (campaign.campaign_language !== item.lang_title) {
       return item.data_url
     }
@@ -68,13 +143,16 @@ const getApiUris = function (campaign) {
   })
   return urls.filter(url => url)
 };
-const analyzeAll = function (campaigns) {
-  const results = {};
+
+const analyzeAll = (campaigns, settings) => {
+  const results = [];
   for (let i=0; i<campaigns.length; i++) {
     const campaign = campaigns[i];
-    results[campaign.campaign_language] = analyzeCampaign(campaign);
+    results.push({
+       language: campaign.campaign_language.toLowerCase(),
+       result: analyzeCampaign(campaign, settings)});
   }
-  return results;
+  return {results};
 };
 
 

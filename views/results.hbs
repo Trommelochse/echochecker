@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="column column-75 results-container">
+    {{#each results}}
+    <div class="result-container">
+      <label class="label-result">Results for {{ language }}</label>
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Desktop</th>
+            <th>Mobile</th>
+            <th>Native</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each result.optInResults}}
+          <tr>
+            <td>Opt In Link</td>
+            <td>
+              {{#if dsk.pass}}
+                <span class="success">Passed</span>
+              {{else}}
+                <span class="error">{{dsk.err}}</span>
+              {{/if}}
+            </td>
+            <td>
+              {{#if mob.pass}}
+                <span class="success">Passed</span>
+              {{else}}
+                <span class="error">{{mob.err}}</span>
+              {{/if}}
+            </td>
+            <td>
+              {{#if nat.pass}}
+                <span class="success">Passed</span>
+              {{else}}
+                <span class="error">{{nat.err}}</span>
+              {{/if}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{/each}}
+  </div>
+  <div class="column">
+    <div class="result-overview-container">
+      <label class="label-overview">Overview</label>
+      <table class="result-overview-table">
+        <tbody>
+          <tr>
+            <td>Total Links:</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Passed:</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Warning:</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Failed:</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Score:</td>
+            <td>66%</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="result-recap error">Failed. Please make sure your links are correct.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="column"><a href="/" class="button button-outline">Go back</a></div>
+</div>

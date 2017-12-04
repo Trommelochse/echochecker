@@ -3,6 +3,37 @@
   margin: 0 auto;
 }
 
+.app-header {
+  margin-bottom: 5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #cacaca;
+}
+
+label {
+  color: #003171;
+  font-weight: 500;
+}
+
+label.label-result, label.label-overview {
+  font-size: 1.8rem;
+  text-align: center;
+  background: #4B8FA3;
+  color: #fff;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0.8rem 0;
+  margin: 0;
+}
+
+label.label-overview {
+  background: #0D5165;
+}
+
+.row .column input:focus,
+.row .column select:focus {
+  border-color: #5C84C5;
+}
+
 input.button-primary {
   background-color: #407A52;
   border-color: #407A52;
@@ -13,14 +44,103 @@ input.button-primary:hover {
   border-color: #407A52;
 }
 
+input.button.button-outline, a.button.button-outline {
+  border: 0.125rem solid #1F4788;
+  color: #1F4788;
+}
+
+input.button.button-outline:hover, a.button.button-outline:hover {
+  background: #1F4788;
+  color: #fff;
+  border-color: #1F4788;
+}
+
+select, select:focus {
+  background: transparent;
+  -webkit-appearance: menulist;
+}
+
+.success {
+  color: #26A65B;
+  font-weight: 400;
+}
+
+.error {
+  color: #8F1D21;
+  font-weight: 400;
+}
+
+.warning {
+  color: #FFA400;
+  font-weight: 400;
+}
+
+.result-container {
+  margin-bottom: 2rem;
+}
+
+table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+table td, table th {
+  padding: 1.2rem 1.5rem;
+  font-weight: 400;
+}
+
+td:first-child, th:first-child {
+  padding: 1.2rem 1.5rem;
+}
+
+td {
+  color: #232323;
+}
+
+.result-table, .result-overview-table {
+  border-left: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+}
+
+.result-table th {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+
+.result-overview-container {
+
+}
+
+.result-recap {
+  font-size: 1.325rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.result-recap.success {
+  background: #26A65B;
+}
+
+.result-recap.error {
+  background: #8F1D21;
+}
+
+.result-recap.warning {
+  background: #FFA400;
+}
+
+/* overlay & spinner */
 .overlay-loading {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0,0,0,0.45);
-  z.index: 100;
+  background: rgba(0,0,20,0.66);
+  z-index: 100;
+  opacity: 0;
   display: none;
 }
 

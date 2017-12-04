@@ -48,7 +48,7 @@
           <div class="column">
             <label for="optInCode">Product:</label>
             <select name="product" id="product">
-              <option value="" default>none</option>
+              <option value="startpage">Startpage</option>
               <option value="sb">Sportsbook</option>
               <option value="ca">Casino</option>
               <option value="lca">Live Casino</option>
@@ -73,6 +73,8 @@
 
 <script type="text/javascript">
   $('#button-init').on('click', function(ev) {
+    console.log(ev.target.value);
     $('.overlay-loading').css('display', 'flex');
+    $('.overlay-loading').animate({opacity: 1}, 800);
   });
 </script>
