@@ -8,9 +8,9 @@ const analyzeDesktopLink = (str, baseUrl, optInCode) => {
     if (rest === `?action=join&campaign=${optInCode}`) {
       return {pass: true}
     }
-    return {err: 'optin'}
+    return {err: 'Opt in code'}
   }
-  return {err: 'base'}
+  return {err: 'URL'}
 }
 
 const analyzeMobileLink = (str, baseUrl, optInCode) => {
@@ -20,27 +20,27 @@ const analyzeMobileLink = (str, baseUrl, optInCode) => {
     if (rest === `?campaign=${optInCode}`) {
       return {pass: true}
     }
-    return {err: 'optin'}
+    return {err: 'Opt in code'}
   }
-  return {err: 'base'}
+  return {err: 'URL'}
 }
 
 const analyzeNativeLink = (link, optInCode, product) => {
   if (link.txtCampaignID !== optInCode) {
-    return {err: 'optin'}
+    return {err: 'Opt in code'}
   }
   if (link.ddlShowFeedback !== 'true') {
-    return {err: 'feedback'}
+    return {err: 'No Feedback'}
   }
   if (link.ddlSuccessCTA !== "GoToCasinoLobby") {
     if (product.indexOf('ca') === -1) {
-      return {err: 'lobby'}
+      return {err: 'Lobby'}
     }
     return {pass: true}
   }
   if (link.ddlSuccessCTA !== "GoToSportsbookLobby") {
     if (product !== 'sb') {
-      return {err: 'lobby'}
+      return {err: 'Lobby'}
     }
     return {pass: true}
   }

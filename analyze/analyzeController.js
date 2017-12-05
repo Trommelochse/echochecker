@@ -11,7 +11,12 @@ const getResults = function(req, res) {
       const campaigns = args.map(campaign => campaign.data);
       campaigns.unshift(defaultCampaign);
       const results = lib.analyzeAll(campaigns, settings);
-      //res.send(results);
+      results.campaignUrl = defaultCampaign.
+        campaign_settings.
+        languages[0].url.substr(0, defaultCampaign.
+          campaign_settings.
+          languages[0].url.length - 3);
+      //res.send(defaultCampaign);
       res.render('results', results);
     }))
     .catch(err => res.render('error', {message: err}));

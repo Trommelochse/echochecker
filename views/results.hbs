@@ -1,4 +1,9 @@
 <div class="row">
+  <div class="column">
+    <h4 class="sub-heading">Results for campaign <a href="{{ campaignUrl }}" target="_blank">{{ campaignUrl }}</a></h4>
+  </div>
+</div>
+<div class="row">
   <div class="column column-75 results-container">
     {{#each results}}
     <div class="result-container">
@@ -18,23 +23,23 @@
             <td>Opt In Link</td>
             <td>
               {{#if dsk.pass}}
-                <span class="success">Passed</span>
+                <i class="fa fa-check success icon-big"></i>
               {{else}}
-                <span class="error">{{dsk.err}}</span>
+                <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{dsk.err}} is wrong</span>
               {{/if}}
             </td>
             <td>
               {{#if mob.pass}}
-                <span class="success">Passed</span>
+                <span class="success"><i class="fa fa-check success icon-big"></i></span>
               {{else}}
-                <span class="error">{{mob.err}}</span>
+                <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{mob.err}} is wrong</span>
               {{/if}}
             </td>
             <td>
               {{#if nat.pass}}
-                <span class="success">Passed</span>
+                <span class="success"><i class="fa fa-check success icon-big"></i></span>
               {{else}}
-                <span class="error">{{nat.err}}</span>
+                <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{nat.err}} is wrong</span>
               {{/if}}
             </td>
           </tr>
@@ -54,15 +59,15 @@
             <td>{{ summary.countTotal }}</td>
           </tr>
           <tr>
-            <td><i class="fa fa-check" aria-hidden="true"></i> Passed:</td>
+            <td><i class="fa fa-check success" aria-hidden="true"></i> Passed:</td>
             <td>{{ summary.countPass }}</td>
           </tr>
           <tr>
-            <td><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Errors:</td>
+            <td><i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> Errors:</td>
             <td>{{ summary.countErr }}</td>
           </tr>
           <tr>
-            <td><i class="fa fa-exclamation" aria-hidden="true"></i> Warnings:</td>
+            <td><i class="fa fa-exclamation warning" aria-hidden="true"></i> Warnings:</td>
             <td>{{ summary.countWarn }}</td>
           </tr>
         </tbody>

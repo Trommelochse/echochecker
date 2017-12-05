@@ -1,3 +1,23 @@
+h3 {
+  font-weight: 400;
+}
+
+a {
+  color: #003171;
+  transition: none;
+}
+
+a:hover {
+  color: #006e70;
+  text-decoration: underline;
+}
+
+p.note {
+  font-size: 1.125rem;
+  color: #a0a0a5;
+  font-style: italic;
+}
+
 .wrapper {
   width: 960px;
   margin: 0 auto;
@@ -53,11 +73,16 @@ input.button.button-outline:hover, a.button.button-outline:hover {
   background: #1F4788;
   color: #fff;
   border-color: #1F4788;
+  text-decoration: none;
 }
 
 select, select:focus {
   background: transparent;
   -webkit-appearance: menulist;
+}
+
+i.icon-big {
+  font-size: 2.5rem;
 }
 
 .success {
@@ -102,9 +127,12 @@ td {
   border-right: 1px solid #e1e1e1;
 }
 
+.result-table th, .result-table td {
+  text-align: center;
+}
+
 .result-table th {
   font-weight: 700;
-  font-size: 2rem;
 }
 
 
@@ -129,6 +157,12 @@ td {
 
 .result-recap.warning {
   background: #FFA400;
+}
+
+/* helpers */
+
+.no-margin {
+  margin: 0 !important;
 }
 
 /* overlay & spinner */
