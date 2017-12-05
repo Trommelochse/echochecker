@@ -82,22 +82,26 @@ select, select:focus {
 }
 
 i.icon-big {
-  font-size: 2.5rem;
+  font-size: 2rem !important;
 }
 
 .success {
-  color: #26A65B;
+  color: #26A65B !important;
   font-weight: 400;
 }
 
 .error {
-  color: #8F1D21;
-  font-weight: 400;
+  color: #8F1D21 !important;
+  font-weight: 400 !important;
 }
 
 .warning {
-  color: #FFA400;
+  color: #FFA400 !important;
   font-weight: 400;
+}
+
+.results-container {
+  margin-bottom: 3rem;
 }
 
 .result-container {
@@ -135,9 +139,17 @@ td {
   font-weight: 700;
 }
 
+.result-table td {
+  font-size: 1.35rem;
+}
+
+.result-table td i {
+  font-size: 1.125rem;
+}
+
 
 .result-overview-container i {
-  min-width: 2.5rem;
+  min-width: 3rem;
 }
 
 .result-recap {
@@ -165,8 +177,8 @@ td {
   margin: 0 !important;
 }
 
-/* overlay & spinner */
-.overlay-loading {
+/* overlay, modal, spinner */
+.overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -174,8 +186,14 @@ td {
   left: 0;
   background: rgba(0,0,20,0.66);
   z-index: 100;
-  opacity: 0;
+  opacity: 1;
   display: none;
+}
+
+.modal {
+  margin: auto;
+  padding: 2.75rem 5.5rem;
+  background: #fff;
 }
 
 .spinner-container {

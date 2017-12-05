@@ -1,3 +1,18 @@
+
+<div class="overlay overlay-warning">
+  <div class="modal">
+    <div class="row">
+      <div class="column">
+        <h4 class="warning"><i class="fa fa-exclamation-triangle"></i> <b>Warning!</b></h4>
+        <p>This version is being developed and tested. Results may be inaccurate and should not be the last instance.<br>
+          Only 'Opt In links' are being tested.</p>
+        <label for="check-warning">Got it!
+        <input type="checkbox" id="check-warning"/></label>
+        <input type="button" class="button button-primary"  value="Continue">
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="column column-75">
     <form action="analyze" method="get">
@@ -62,18 +77,28 @@
       </fieldset>
     </form>
   </div>
-  <div class="overlay-loading">
+  <div class="overlay" style="display: none; opacity: 0;">
     <div class="spinner-container">
       <div class="spinner"></div>
-      <div class="spinner-description">The server is checking your campaign.<br>This might take a while...</div>
+      <div class="spinner-description">The server is checking your campaign.<br>This might take a few seconds...</div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
   console.log('%cHey, I hope you are having a good day!', 'background: #006EB4; color: #fff; font-size: 12px; padding: 4px 10px; text-shadow:1px 1px rgba(0,0,0,0.4)');
+  if (! localStorage.getItem('acceptedwarning')) {
+    $('.overlay-warning').css('display', 'flex');
+  }
+  $('.overlay-warning .button').on('click', function(ev) {
+    if ($('#check-warning:checked').length) {
+      localStorage.setItem('acceptedwarning', 'true');
+      $('.overlay-warning').remove();
+    } else {
+      $('#check-warning').parent().addClass('error');
+    }
+  });
   $('#button-init').on('click', function(ev) {
-    console.log(ev.target.value);
     $('.overlay-loading').css('display', 'flex');
     $('.overlay-loading').animate({opacity: 1}, 800);
   });
