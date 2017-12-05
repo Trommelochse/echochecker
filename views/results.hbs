@@ -66,13 +66,22 @@
             <td><i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> Errors:</td>
             <td>{{ summary.countErr }}</td>
           </tr>
-          <tr>
-            <td><i class="fa fa-exclamation warning" aria-hidden="true"></i> Warnings:</td>
-            <td>{{ summary.countWarn }}</td>
-          </tr>
         </tbody>
       </table>
+      {{#if summary.warnings.length}}
+      <label class="label-overview">Warnings</label>
+      <table class="result-warning-table">
+        <tbody>
+          {{#each summary.warnings}}
+          <tr>
+            <td><i class="fa fa-exclamation warning" aria-hidden="true"></i> {{ this }}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
     </div>
+
   </div>
 </div>
 <div class="row">

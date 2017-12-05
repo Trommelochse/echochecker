@@ -1,4 +1,5 @@
 var axios = require('axios');
+var _ = require('lodash');
 var data = require('../../data/');
 
 const analyzeDesktopLink = (str, baseUrl, optInCode) => {
@@ -135,6 +136,8 @@ const analyzeCampaign = (campaign, settings) => {
 };
 
 const getSummary = results => {
+  const warnings = [];
+  const optInsPerLanguage = [];
   let countTotal = 0;
   let countPass = 0;
   let countErr = 0;
@@ -149,15 +152,22 @@ const getSummary = results => {
         countTotal++;
         if (current[device].pass) countPass++
         if (current[device].err) countErr++
-        if (current[device].warn) countWarn++
       }
     }
+    optInsPerLanguage.push(optInResults.length);
   }
+  // check for warnings
+  if (_.uniq(optInsPerLanguage).length !== 1) {
+    warnings.push('Some of your languages have more opt ins than others.')
+  }
+
+  console.log(warnings);
+
   return {
     countTotal,
     countPass,
     countErr,
-    countWarn,
+    warnings,
     passed: countTotal === countPass
   }
 

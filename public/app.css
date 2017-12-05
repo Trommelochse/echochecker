@@ -47,6 +47,8 @@ label.label-result, label.label-overview {
 
 label.label-overview {
   background: #0D5165;
+  text-align: left;
+  padding-left: 2rem;
 }
 
 .row .column input:focus,
@@ -126,7 +128,7 @@ td {
   color: #232323;
 }
 
-.result-table, .result-overview-table {
+.result-table, .result-overview-table, .result-warning-table {
   border-left: 1px solid #e1e1e1;
   border-right: 1px solid #e1e1e1;
 }
@@ -139,7 +141,7 @@ td {
   font-weight: 700;
 }
 
-.result-table td {
+.result-table td, .result-warning-table td {
   font-size: 1.35rem;
 }
 
@@ -147,9 +149,8 @@ td {
   font-size: 1.125rem;
 }
 
-
-.result-overview-container i {
-  min-width: 3rem;
+.result-warning-table td i {
+  margin-right: 0.5rem;
 }
 
 .result-recap {
