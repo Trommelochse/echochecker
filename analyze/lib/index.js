@@ -8,64 +8,73 @@ const analyzeDesktopLink = (str, baseUrl, optInCode) => {
     if (rest === `?action=join&campaign=${optInCode}`) {
       return {pass: true}
     }
-    return {err: 'Opt in code'}
+    return {err: 'Opt in code is wrong'}
   }
-  return {err: 'URL'}
+  return {err: 'URL is wrong'}
 }
 
 const analyzeMobileLink = (str, baseUrl, optInCode) => {
   if (str.indexOf(baseUrl) === 0) {
     let rest = str.substr(baseUrl.length);
     rest = rest[0] === '/' ? rest.substr(1) : rest;
-    if (rest === `?campaign=${optInCode}`) {
+    const params = baseUrl.indexOf('nordicbet.dk') === -1 ?
+      `?campaign=${optInCode}` : `?modalroute=join-campaign/${optInCode}`;
+    if (rest === params) {
       return {pass: true}
     }
-    return {err: 'Opt in code'}
+    return {err: 'Opt in code is wrong'}
   }
-  return {err: 'URL'}
+  return {err: 'URL is wrong'}
 }
 
 const analyzeNativeLink = (link, optInCode, product) => {
-  if (link.txtCampaignID !== optInCode) {
-    return {err: 'Opt in code'}
+  if (link.ddlFunction === 'OptinCampaign') {
+    return {err: 'Use JoinCampaign function'}
+  }
+  if (link.txtCampaignID.toLowerCase() !== optInCode.toLowerCase()) {
+    return {err: 'Opt in code is wrong'}
   }
   if (link.ddlShowFeedback !== 'true') {
-    return {err: 'No Feedback'}
+    return {err: 'Use Show Feedback'}
   }
-  if (link.ddlSuccessCTA !== "GoToCasinoLobby") {
-    if (product.indexOf('ca') === -1) {
-      return {err: 'Lobby'}
+  if (product === 'ca' || product === 'lca') {
+    if (link.ddlSuccessCTA === "GoToCasinoLobby")  {
+      return {pass: true}
     }
-    return {pass: true}
-  }
-  if (link.ddlSuccessCTA !== "GoToSportsbookLobby") {
-    if (product !== 'sb') {
-      return {err: 'Lobby'}
+    if (link.ddlSuccessCTA === "GoToLobby" && link.ddlLobby_successCTA === 'casino')  {
+      return {pass: true}
     }
-    return {pass: true}
+    return {err: 'Wrong Lobby on success'}
   }
-  return {err: 'unknown'}
+  if (product === 'sb') {
+    if (link.ddlSuccessCTA === "GoToLobby" && link.ddlLobby_successCTA === 'sportsbook') {
+      return {pass: true}
+    }
+    return {err: 'Wrong Lobby on success'}
+  }
+  return {err: 'Unknown error'}
 }
 
 const getOptInResults = (links, settings) => {
-  const optInLinks = links.filter(link => link.ddlFunction === 'JoinCampaign');
+  const optInLinks = links.filter(link =>
+    link.ddlFunction === 'JoinCampaign' || link.ddlFunction === 'OptinCampaign');
   const results = [];
   for (let i=0; i<optInLinks.length; i++) {
     const link = optInLinks[i];
     const result = {
       dsk: analyzeDesktopLink(
-        link.txtDesktopWebURL,
+        link.txtDesktopWebURL.replace(/\s*$/,""),
         settings.brandUrls.webUrl,
         settings.optInCode
       ),
       mob: analyzeMobileLink(
-        link.txtMobileWebURL,
+        link.txtMobileWebURL.replace(/\s*$/,""),
         settings.brandUrls.mobUrl,
         settings.optInCode
       ),
       nat: analyzeNativeLink (
         link,
-        settings.optInCode,
+        settings.optInCode.replace(/\s*$/,""),
         settings.product
       )
     };

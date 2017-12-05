@@ -16,8 +16,11 @@ const getResults = function(req, res) {
         languages[0].url.substr(0, defaultCampaign.
           campaign_settings.
           languages[0].url.length - 3);
-      //res.send(defaultCampaign);
-      res.render('results', results);
+      if (settings.raw) {
+        res.send(campaigns);
+      } else {
+        res.render('results', results);
+      }
     }))
     .catch(err => res.render('error', {message: err}));
 };

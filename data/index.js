@@ -149,6 +149,44 @@ const brandData = {
     },
 
   },
+  nordicbetdk: {
+    da: {
+      ca: {
+        web: 'https://www.nordicbet.dk/casino',
+        mob: 'https://m.nordicbet.dk/da/casino',
+      },
+      sb: {
+        web: 'https://www.nordicbet.dk/sports',
+        mob: 'https://m.nordicbet.dk/da/sportsbook',
+      },
+      lca: {
+        web: 'https://www.nordicbet.dk/casino/livecasino',
+        mob: 'https://m.nordicbet.dk/da/casino',
+      },
+      startpage: {
+        web: 'https://www.nordicbet.dk',
+        mob: 'https://m.nordicbet.dk/da/home',
+      }
+    },
+    en: {
+      ca: {
+        web: 'https://www.nordicbet.dk/casino',
+        mob: 'https://m.nordicbet.dk/da/casino',
+      },
+      sb: {
+        web: 'https://www.nordicbet.dk/sports',
+        mob: 'https://m.nordicbet.dk/da/sportsbook',
+      },
+      lca: {
+        web: 'https://www.nordicbet.dk/casino/livecasino',
+        mob: 'https://m.nordicbet.dk/da/da/casino',
+      },
+      startpage: {
+        web: 'https://www.nordicbet.dk',
+        mob: 'https://m.nordicbet.dk/da/home',
+      }
+    },
+  },
   betsafe: {
     en: {
       ca: {
@@ -227,11 +265,13 @@ const brandData = {
 }
 
 const getBrandUrls = settings => {
-  const constants = {};
-  const brand = brandData[settings.brand];
-  constants.webUrl = brand[settings.language][settings.product].web;
-  constants.mobUrl = brand[settings.language][settings.product].mob;
-  return constants
+  const brandExact = settings.topdomain === '.dk' ?
+    settings.brand + 'dk' : settings.brand;
+  const temp = {};
+  const brand = brandData[brandExact];
+  temp.webUrl = brand[settings.language][settings.product].web;
+  temp.mobUrl = brand[settings.language][settings.product].mob;
+  return temp
 }
 
 module.exports = {
