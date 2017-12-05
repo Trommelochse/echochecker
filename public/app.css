@@ -108,8 +108,8 @@ td {
 }
 
 
-.result-overview-container {
-
+.result-overview-container i {
+  min-width: 2.5rem;
 }
 
 .result-recap {

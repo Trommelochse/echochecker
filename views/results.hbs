@@ -50,27 +50,20 @@
       <table class="result-overview-table">
         <tbody>
           <tr>
-            <td>Total Links:</td>
-            <td>18</td>
+            <td><i class="fa fa-link" aria-hidden="true"></i> Total Links:</td>
+            <td>{{ summary.countTotal }}</td>
           </tr>
           <tr>
-            <td>Passed:</td>
-            <td>12</td>
+            <td><i class="fa fa-check" aria-hidden="true"></i> Passed:</td>
+            <td>{{ summary.countPass }}</td>
           </tr>
           <tr>
-            <td>Warning:</td>
-            <td>4</td>
+            <td><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Errors:</td>
+            <td>{{ summary.countErr }}</td>
           </tr>
           <tr>
-            <td>Failed:</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>Score:</td>
-            <td>66%</td>
-          </tr>
-          <tr>
-            <td colspan="2" class="result-recap error">Failed. Please make sure your links are correct.</td>
+            <td><i class="fa fa-exclamation" aria-hidden="true"></i> Warnings:</td>
+            <td>{{ summary.countWarn }}</td>
           </tr>
         </tbody>
       </table>

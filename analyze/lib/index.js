@@ -125,6 +125,47 @@ const analyzeCampaign = (campaign, settings) => {
   return result
 };
 
+const getSummary = results => {
+  let countTotal = 0;
+  let countPass = 0;
+  let countErr = 0;
+  let countWarn = 0;
+
+  for (let i=0; i<results.length; i++) {
+    const result = results[i];
+    const optInResults = result.result.optInResults;
+    for (let j=0; j< optInResults.length; j++) {
+      const current = optInResults[j];
+      for (device in current) {
+        countTotal++;
+        if (current[device].pass) countPass++
+        if (current[device].err) countErr++
+        if (current[device].warn) countWarn++
+      }
+    }
+  }
+  return {
+    countTotal,
+    countPass,
+    countErr,
+    countWarn,
+    passed: countTotal === countPass
+  }
+
+}
+
+const analyzeAll = (campaigns, settings) => {
+  const results = [];
+  for (let i=0; i<campaigns.length; i++) {
+    const campaign = campaigns[i];
+    results.push({
+       language: campaign.campaign_language.toLowerCase(),
+       result: analyzeCampaign(campaign, settings)});
+  }
+  const summary = getSummary(results);
+  return {results, summary};
+};
+
 const getPromiseStack = arr => {
   const temp = [];
   for (let i=0; i<arr.length; i++) {
@@ -143,18 +184,6 @@ const getApiUris = campaign => {
   })
   return urls.filter(url => url)
 };
-
-const analyzeAll = (campaigns, settings) => {
-  const results = [];
-  for (let i=0; i<campaigns.length; i++) {
-    const campaign = campaigns[i];
-    results.push({
-       language: campaign.campaign_language.toLowerCase(),
-       result: analyzeCampaign(campaign, settings)});
-  }
-  return {results};
-};
-
 
 module.exports = {
   getApiUris,
