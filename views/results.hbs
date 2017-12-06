@@ -51,6 +51,19 @@
   </div>
   <div class="column">
     <aside>
+      <div class="result-recap-container">
+        <label class="label-side">Total</label>
+          <div class="result-symbol-container">
+            {{#if summary.passed}}
+            <i class="fa fa-smile-o success"></i>
+            <h4 class="no-margin success">All tests passed!</h4>
+            {{else}}
+            <i class="fa fa-frown-o error" aria-hidden="true"></i>
+            <h4 class="no-margin error">Test failed</h4>
+            {{/if}}
+          </div>
+        </label>
+      </div>
       <div class="result-overview-container">
         <label class="label-side">Overview</label>
         <table class="result-overview-table">
@@ -81,18 +94,6 @@
           </tbody>
         </table>
         {{/if}}
-      </div>
-      <div class="result-recap-container">
-        <label class="label-side primary">Result</label>
-        <div class="result-symbol-container">
-          {{#if summary.passed}}
-          <i class="fa fa-smile-o success"></i>
-          <h4 class="no-margin success">All tests passed!</h4>
-          {{else}}
-          <i class="fa fa-frown-o error" aria-hidden="true"></i>
-          <h4 class="no-margin error">Test failed</h4>
-          {{/if}}
-        </div>        
       </div>
     </aside>
 
