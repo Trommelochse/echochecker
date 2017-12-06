@@ -4,8 +4,8 @@
       <fieldset>
         <div class="row">
           <div class="column">
-            <label for="echoCampaignId">Echo Campaign ID</label>
-            <input type="text" placeholder="i.e. 11395" name="echoCampaignId" id="echoCampaignId">
+            <label for="echoCampaignId">Echo Campaign ID<span class="error">*</span></label>
+            <input type="number" placeholder="i.e. 11395" name="echoCampaignId" id="echoCampaignId">
           </div>
         </div>
         <div class="row">
@@ -42,11 +42,11 @@
         </div>
         <div class="row">
           <div class="column column-66">
-            <label for="optInCode">Opt In Code:</label>
-            <input type="text" placeholder="WC2018_RFB_NO" name="optInCode" id="optInCode">
+            <label for="optInCode">Opt In Code<span class="error">*</span></label>
+            <input type="text" placeholder="i.e. WC2018_RFB_NO" name="optInCode" id="optInCode">
           </div>
           <div class="column">
-            <label for="optInCode">Product:</label>
+            <label for="optInCode">Product</label>
             <select name="product" id="product">
               <option value="sb">Sportsbook</option>
               <option value="ca">Casino</option>
@@ -61,11 +61,12 @@
         </div>
       </fieldset>
     </form>
+    <hr>
   </div>
   <div class="overlay overlay-loading" style="display: none; opacity: 0;">
     <div class="spinner-container">
       <div class="spinner"></div>
-      <div class="spinner-description">The server is checking your campaign.<br>This might take a few seconds...</div>
+      <div class="spinner-description">Your campaign is being checked.<br>This will only take a few seconds...</div>
     </div>
   </div>
   <footer>

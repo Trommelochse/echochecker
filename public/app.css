@@ -1,10 +1,12 @@
 body {
   min-height: 95vh;
+  color: #232323;
 }
 
 aside {
   position: relative;
   transition: top 170ms ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 footer {
@@ -24,12 +26,12 @@ h3 {
 }
 
 a {
-  color: #003171;
+  color: #006e70;
   transition: none;
 }
 
 a:hover {
-  color: #006e70;
+  color: #003171;
   text-decoration: underline;
 }
 
@@ -50,9 +52,13 @@ p.note {
   border-bottom: 1px solid #cacaca;
 }
 
+.app-header a {
+  text-decoration: none;
+}
+
 label {
-  color: #003171;
-  font-weight: 500;
+  font-weight: 400;
+  color: #606c76;
 }
 
 label.label-result, label.label-side {
@@ -66,7 +72,7 @@ label.label-result, label.label-side {
 
 label.label-result {
   text-transform: lowercase;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 label.label-side {
@@ -131,7 +137,8 @@ i.icon-big {
 }
 
 .result-container {
-  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin-bottom: 1.5rem;
 }
 
 .result-symbol-container {
@@ -155,25 +162,28 @@ table {
 }
 
 table td, table th {
-  background: #fdfdff;
+  color: #232323;
   padding: 1.2rem 1.5rem;
   font-weight: 400;
+}
+
+table td {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+table tr:last-chile td {
+  border-bottom: none;
 }
 
 td:first-child, th:first-child {
   padding: 1.2rem 1.5rem;
 }
 
-td, th {
-  color: #232323;
-}
-
 .result-table,
 .result-overview-table,
 .result-warning-table,
 .result-symbol-container {
-  border-left: 1px solid #e1e1e1;
-  border-right: 1px solid #e1e1e1;
+
 }
 
 .result-table th {
