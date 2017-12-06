@@ -52,25 +52,25 @@
   <div class="column">
     <aside>
       <div class="result-overview-container">
-        <label class="label-overview">Overview</label>
+        <label class="label-side">Overview</label>
         <table class="result-overview-table">
           <tbody>
             <tr>
-              <td><i class="fa fa-link" aria-hidden="true"></i> Total Links:</td>
+              <td>Total Links:</td>
               <td>{{ summary.countTotal }}</td>
             </tr>
             <tr>
-              <td><i class="fa fa-check success" aria-hidden="true"></i> Passed:</td>
+              <td>Passed:</td>
               <td>{{ summary.countPass }}</td>
             </tr>
             <tr>
-              <td><i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> Errors:</td>
+              <td>Errors:</td>
               <td>{{ summary.countErr }}</td>
             </tr>
           </tbody>
         </table>
         {{#if summary.warnings.length}}
-        <label class="label-overview">Warnings</label>
+        <label class="label-side">Warnings</label>
         <table class="result-warning-table">
           <tbody>
             {{#each summary.warnings}}
@@ -82,11 +82,23 @@
         </table>
         {{/if}}
       </div>
+      <div class="result-recap-container">
+        <label class="label-side primary">Result</label>
+        <div class="result-symbol-container">
+          {{#if summary.passed}}
+          <i class="fa fa-smile-o success"></i>
+          <h4 class="no-margin success">All tests passed!</h4>
+          {{else}}
+          <i class="fa fa-frown-o error" aria-hidden="true"></i>
+          <h4 class="no-margin error">Test failed</h4>
+          {{/if}}
+        </div>        
+      </div>
     </aside>
 
   </div>
 </div>
-<div class="row">
+<div class="row" style="margin-bottom: 3rem;">
   <div class="column"><a href="/" class="button button-outline">Go back</a></div>
 </div>
 <script type="text/javascript">
