@@ -1,3 +1,9 @@
+aside {
+  position: relative;
+  transition: top 170ms ease;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.075);
+}
+
 h3 {
   font-weight: 400;
 }
@@ -36,18 +42,22 @@ label {
 
 label.label-result, label.label-overview {
   font-size: 1.8rem;
-  text-align: center;
-  background: #4B8FA3;
+  background: #5775A5;
   color: #fff;
   font-weight: 400;
-  text-transform: uppercase;
-  padding: 0.8rem 0;
+  padding: 0.8rem 1.5rem;
   margin: 0;
+}
+
+label.label-result {
+  text-transform: lowercase;
+  font-weight: 300;
+  padding-left: 2rem;
 }
 
 label.label-overview {
   background: #0D5165;
-  text-align: left;
+  color: #fff;
   padding-left: 2rem;
 }
 
@@ -108,6 +118,7 @@ i.icon-big {
 
 .result-container {
   margin-bottom: 2rem;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.075);
 }
 
 table {
@@ -133,12 +144,8 @@ td {
   border-right: 1px solid #e1e1e1;
 }
 
-.result-table th, .result-table td {
-  text-align: center;
-}
-
 .result-table th {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .result-table td, .result-warning-table td {
