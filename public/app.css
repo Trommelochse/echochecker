@@ -1,12 +1,15 @@
 body {
   min-height: 95vh;
+  background: #f5f5f5;
   color: #232323;
 }
 
 aside {
   position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.02), 0 1px 1px 0 rgba(0,0,0,0.08);
   transition: top 170ms ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 footer {
@@ -14,10 +17,11 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #f3f3f3;
+  background-color: #fdfdfd;
   font-size: 0.85em;
   text-align: center;
   padding: 1.75rem 0;
+  border-top: 1px solid #ededed;
   margin-top: 8rem;
 }
 
@@ -63,7 +67,6 @@ label {
 
 label.label-result, label.label-side {
   font-size: 1.8rem;
-  background: #5775A5;
   color: #fff;
   font-weight: 300;
   padding: 0.8rem 1.5rem;
@@ -73,10 +76,11 @@ label.label-result, label.label-side {
 label.label-result {
   text-transform: lowercase;
   padding-left: 1.5rem;
+  background: #33A1A3;
 }
 
 label.label-side {
-  background: #8D608C;
+  background: #1F4788;
   color: #fff;
   padding-left: 1.5rem;
 }
@@ -86,14 +90,18 @@ label.label-side {
   border-color: #5C84C5;
 }
 
+.row input, .row select, .row option {
+  background: #fff;
+}
+
 input.button-primary {
-  background-color: #407A52;
-  border-color: #407A52;
+  background-color: #006e70;
+  border-color: #006e70;
 }
 
 input.button-primary:hover {
-  background-color: #276139;
-  border-color: #407A52;
+  background-color: #005A5C;
+  border-color: #005A5C;
 }
 
 input.button.button-outline, a.button.button-outline {
@@ -109,7 +117,7 @@ input.button.button-outline:hover, a.button.button-outline:hover {
 }
 
 select, select:focus {
-  background: transparent;
+  background: #fff;
   -webkit-appearance: menulist;
 }
 
@@ -137,7 +145,9 @@ i.icon-big {
 }
 
 .result-container {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 1px 1px 0 rgba(0,0,0,0.08);
   margin-bottom: 1.5rem;
 }
 
@@ -171,7 +181,7 @@ table td {
   border-bottom: 1px solid #f2f2f2;
 }
 
-table tr:last-chile td {
+table tr:last-child td {
   border-bottom: none;
 }
 
@@ -183,7 +193,7 @@ td:first-child, th:first-child {
 .result-overview-table,
 .result-warning-table,
 .result-symbol-container {
-
+  background: #fff;
 }
 
 .result-table th {
