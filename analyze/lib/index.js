@@ -161,8 +161,6 @@ const getSummary = results => {
     warnings.push('Some of your languages have more opt ins than others.')
   }
 
-  console.log(warnings);
-
   return {
     countTotal,
     countPass,

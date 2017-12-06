@@ -1,7 +1,23 @@
+body {
+  min-height: 95vh;
+}
+
 aside {
   position: relative;
   transition: top 170ms ease;
   box-shadow: 0px 1px 3px rgba(0,0,0,0.075);
+}
+
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f3f3f3;
+  font-size: 0.85em;
+  text-align: center;
+  padding: 1.75rem 0;
+  margin-top: 8rem;
 }
 
 h3 {
@@ -196,12 +212,6 @@ td {
   z-index: 100;
   opacity: 1;
   display: none;
-}
-
-.modal {
-  margin: auto;
-  padding: 2.75rem 5.5rem;
-  background: #fff;
 }
 
 .spinner-container {
