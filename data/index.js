@@ -1,267 +1,119 @@
-const brandData = {
+const productPaths = {
   betsson: {
     en: {
-      ca: {
-        web: 'https://casino.betsson.com/en',
-        mob: 'https://m.betsson.com/en/casino',
-      },
-      sb: {
-        web: 'https://sportsbook.betsson.com/en',
-        mob: 'https://m.betsson.com/en/sportsbook',
-      },
-      lca: {
-        web: 'https://livecasino.betsson.com/en',
-        mob: 'https://m.betsson.com/en/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsson.com/en',
-        mob: 'https://m.betsson.com/en',
-      }
-    },
-    sv: {
-      ca: {
-        web: 'https://casino.betsson.com/sv',
-        mob: 'https://m.betsson.com/sv/casino',
-      },
-      sb: {
-        web: 'https://sportsbook.betsson.com/sv',
-        mob: 'https://m.betsson.com/sv/odds',
-      },
-      lca: {
-        web: 'https://livecasino.betsson.com/sv',
-        mob: 'https://m.betsson.com/sv/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsson.com/sv',
-        mob: 'https://m.betsson.com/sv',
-      }
-    },
-    no: {
-      ca: {
-        web: 'https://casino.betsson.com/no',
-        mob: 'https://m.betsson.com/no/casino',
-      },
-      sb: {
-        web: 'https://sportsbook.betsson.com/no',
-        mob: 'https://m.betsson.com/no/odds',
-      },
-      lca: {
-        web: 'https://livecasino.betsson.com/no',
-        mob: 'https://m.betsson.com/no/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsson.com/no',
-        mob: 'https://m.betsson.com/no',
-      }
-    },
-    fi: {
-      ca: {
-        web: 'https://casino.betsson.com/fi',
-        mob: 'https://m.betsson.com/fi/casino',
-      },
-      sb: {
-        web: 'https://sportsbook.betsson.com/fi',
-        mob: 'https://m.betsson.com/fi/vedonlyonti',
-      },
-      lca: {
-        web: 'https://livecasino.betsson.com/fi',
-        mob: 'https://m.betsson.com/fi/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsson.com/fi',
-        mob: 'https://m.betsson.com/fi',
-      }
-    },
-
+      ca: 'casino',
+      sb: 'sportsbook',
+      lca: 'livecasino'
+    }
   },
   nordicbet: {
     en: {
-      ca: {
-        web: 'https://www.nordicbet.com/en/casino',
-        mob: 'https://m.nordicbet.com/en/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.com/en/odds',
-        mob: 'https://m.nordicbet.com/en/sportsbook',
-      },
-      lca: {
-        web: 'https://www.nordicbet.com/en/livecasino',
-        mob: 'https://m.nordicbet.com/en/live-casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.com/en',
-        mob: 'https://m.nordicbet.com/en',
-      }
-    },
-    sv: {
-      ca: {
-        web: 'https://www.nordicbet.com/sv/casino',
-        mob: 'https://m.nordicbet.com/sv/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.com/sv/odds',
-        mob: 'https://m.nordicbet.com/sv/odds',
-      },
-      lca: {
-        web: 'https://www.nordicbet.com/sv/livecasino',
-        mob: 'https://m.nordicbet.com/sv/live-casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.com/sv',
-        mob: 'https://m.nordicbet.com/sv',
-      }
-    },
-    no: {
-      ca: {
-        web: 'https://www.nordicbet.com/no/casino',
-        mob: 'https://m.nordicbet.com/no/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.com/no/odds',
-        mob: 'https://m.nordicbet.com/no/odds',
-      },
-      lca: {
-        web: 'https://www.nordicbet.com/no/livecasino',
-        mob: 'https://m.nordicbet.com/no/live-casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.com/no',
-        mob: 'https://m.nordicbet.com/no',
-      }
+      ca: 'casino',
+      sb: 'odds',
+      lca: 'livecasino'
     },
     fi: {
-      ca: {
-        web: 'https://www.nordicbet.com/fi/casino',
-        mob: 'https://m.nordicbet.com/fi/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.com/fi/vedonlyönti',
-        mob: 'https://m.nordicbet.com/fi/vedonlyonti',
-      },
-      lca: {
-        web: 'https://www.nordicbet.com/fi/livecasino',
-        mob: 'https://m.nordicbet.com/fi/live-casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.com/fi',
-        mob: 'https://m.nordicbet.com/fi',
-      }
+      ca: 'casino',
+      sb: 'vedonlyönti',
+      lca: 'livecasino'
     },
-
-  },
-  nordicbetdk: {
     da: {
-      ca: {
-        web: 'https://www.nordicbet.dk/casino',
-        mob: 'https://m.nordicbet.dk/da/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.dk/sports',
-        mob: 'https://m.nordicbet.dk/da/sportsbook',
-      },
-      lca: {
-        web: 'https://www.nordicbet.dk/casino/livecasino',
-        mob: 'https://m.nordicbet.dk/da/casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.dk',
-        mob: 'https://m.nordicbet.dk/da/home',
-      }
-    },
-    en: {
-      ca: {
-        web: 'https://www.nordicbet.dk/casino',
-        mob: 'https://m.nordicbet.dk/da/casino',
-      },
-      sb: {
-        web: 'https://www.nordicbet.dk/sports',
-        mob: 'https://m.nordicbet.dk/da/sportsbook',
-      },
-      lca: {
-        web: 'https://www.nordicbet.dk/casino/livecasino',
-        mob: 'https://m.nordicbet.dk/da/da/casino',
-      },
-      startpage: {
-        web: 'https://www.nordicbet.dk',
-        mob: 'https://m.nordicbet.dk/da/home',
-      }
-    },
+      ca: 'casino',
+      sb: 'sports',
+      lca: 'casino\/livecasino'
+    }
   },
   betsafe: {
     en: {
-      ca: {
-        web: 'https://www.betsafe.com/en/casino',
-        mob: 'https://m.betsafe.com/en/casino',
-      },
-      sb: {
-        web: 'https://www.betsafe.com/en/odds',
-        mob: 'https://m.betsafe.com/en/sportsbook',
-      },
-      lca: {
-        web: 'https://www.betsafe.com/en/live-casino',
-        mob: 'https://m.betsafe.com/en/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsafe.com/en',
-        mob: 'https://m.betsafe.com/en',
-      }
+      ca: 'casino',
+      sb: 'odds',
+      lca: 'live-casino'
+    }
+  },
+  obg: {
+    en: {
+      ca: 'casino',
+      sb: 'sportsbook',
+      lca: 'live-casino'
     },
     sv: {
-      ca: {
-        web: 'https://www.betsafe.com/sv/casino',
-        mob: 'https://m.betsafe.com/sv/casino',
-      },
-      sb: {
-        web: 'https://www.betsafe.com/sv/odds',
-        mob: 'https://m.betsafe.com/sv/odds',
-      },
-      lca: {
-        web: 'https://www.betsafe.com/sv/live-casino',
-        mob: 'https://m.betsafe.com/sv/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsafe.com/sv',
-        mob: 'https://m.betsafe.com/sv',
-      }
+      sb: 'odds',
     },
     no: {
-      ca: {
-        web: 'https://www.betsafe.com/no/casino',
-        mob: 'https://m.betsafe.com/no/casino',
-      },
-      sb: {
-        web: 'https://www.betsafe.com/no/odds',
-        mob: 'https://m.betsafe.com/no/odds',
-      },
-      lca: {
-        web: 'https://www.betsafe.com/no/live-casino',
-        mob: 'https://m.betsafe.com/no/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsafe.com/no',
-        mob: 'https://m.betsafe.com/no',
-      }
+      sb: 'odds',
     },
     fi: {
-      ca: {
-        web: 'https://www.betsafe.com/fi/casino',
-        mob: 'https://m.betsafe.com/fi/casino',
-      },
-      sb: {
-        web: 'https://www.betsafe.com/fi/odds',
-        mob: 'https://m.betsafe.com/fi/odds',
-      },
-      lca: {
-        web: 'https://www.betsafe.com/fi/live-casino',
-        mob: 'https://m.betsafe.com/fi/live-casino',
-      },
-      startpage: {
-        web: 'https://www.betsafe.com/fi',
-        mob: 'https://m.betsafe.com/fi',
-      }
+      sb: 'vedonlyonti',
     },
-
+    is: {
+      sb: 'ithrottabok'
+    }
+  },
+  nbdkmob: {
+    da: {
+      ca: 'casino',
+      sb: 'sportsbook',
+      lca: 'casino'
+    }
   }
+}
+
+const getProductPaths = settings => {
+  let productPathDesk, productPathMob;
+  if (settings.brand === 'nordicbet' && settings.language.match(/(fi|da)/)) {
+    productPathDesk = productPaths[settings.brand][settings.language][settings.product];
+  }
+  else if (settings.brand === 'nordicbet') {
+    productPathDesk = productPaths[settings.brand].en[settings.product];
+  }
+  else if (settings.brand === 'betsson' || settings.brand === 'betsafe') {
+    productPathDesk = productPaths[settings.brand].en[settings.product];
+  }
+  if (settings.brand === 'nordicbet' && settings.language === 'da') {
+    productPathMob = productPaths.nbdkmob.da[settings.product];
+  }
+  else {
+    productPathMob = productPaths.obg[settings.language][settings.product] ?
+    productPaths.obg[settings.language][settings.product] :
+    productPaths.obg.en[settings.product];
+  }
+  return {desk: productPathDesk, mob: productPathMob}
+}
+
+const getRegExps = settings => {
+  const regExps = {};
+  const productPaths = getProductPaths(settings);
+  if (settings.brand === 'nordicbet' && settings.topdomain === '.com') {
+    regExps.desk = new RegExp(`(https:\/\/www\.nordicbet\.com)` +
+                             `\/(${settings.language})` +
+                             `\/(${productPaths.desk})(?:\/)?` +
+                             `(\\?action=join\&campaign=${settings.optInCode}(?=\&|$))`);
+  }
+  if (settings.brand === 'nordicbet' && settings.topdomain === '.dk') {
+    regExps.desk = new RegExp(`(https:\/\/www\.nordicbet\.dk)` +
+                             `\/(da)?` +
+                             `\/(${productPaths.desk})(?:\/)?` +
+                             `(\\?action=join\&campaign=${settings.optInCode}(?=\&|$))`);
+  }
+  else if (settings.brand === 'betsson') {
+    regExps.desk = new RegExp(`(https:\/\/${productPaths.desk}\.betsson\.com)` +
+                              `\/(${settings.language})(?:\/)?` +
+                              `(\\?action=join\&campaign=${settings.optInCode}(?=\&|$))`);
+  }
+  if (settings.brand === 'nordicbet' && settings.topdomain === '.dk') {
+    regExps.mob = new RegExp(`(https:\/\/m\.nordicbet\.dk)` +
+                             `\/(${settings.language})` +
+                             `\/(${productPaths.mob})(?:\/)?` +
+                             `(\\?modalroute=join-campaign/${settings.optInCode}(?=\&|$))`);
+  }
+  else {
+    regExps.mob = new RegExp(`(https:\/\/m\.${settings.brand}\.com)` +
+                             `\/(${settings.language})` +
+                             `\/(${productPaths.mob})(?:\/)?` +
+                             `(\\?campaign=${settings.optInCode}(?=\&|$))`);
+  }
+
+  return regExps
 }
 
 const getBrandUrls = settings => {
@@ -275,6 +127,6 @@ const getBrandUrls = settings => {
 }
 
 module.exports = {
-  brandData,
-  getBrandUrls
+  getBrandUrls,
+  getRegExps
 }

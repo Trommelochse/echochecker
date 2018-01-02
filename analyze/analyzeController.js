@@ -1,5 +1,5 @@
-var axios = require('axios');
-var lib = require('./lib');
+const axios = require('axios');
+const lib = require('./lib');
 
 const getResults = function(req, res) {
   const settings = req.query;
@@ -7,8 +7,9 @@ const getResults = function(req, res) {
   const apiUris = lib.getApiUris(defaultCampaign);
   const promiseStack = lib.getPromiseStack(apiUris);
   axios.all(promiseStack)
-    .then(axios.spread(function (...args) {
+    .then(axios.spread((...args) => {
       const campaigns = args.map(campaign => campaign.data);
+
       campaigns.unshift(defaultCampaign);
       const results = lib.analyzeAll(campaigns, settings);
       results.campaignUrl = defaultCampaign.

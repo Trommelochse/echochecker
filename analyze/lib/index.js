@@ -1,31 +1,9 @@
-var axios = require('axios');
-var _ = require('lodash');
-var data = require('../../data/');
+const axios = require('axios');
+const _ = require('lodash');
+const data = require('../../data/');
 
-const analyzeDesktopLink = (str, baseUrl, optInCode) => {
-  if (str.indexOf(baseUrl) === 0) {
-    let rest = str.substr(baseUrl.length);
-    rest = rest[0] === '/' ? rest.substr(1) : rest;
-    if (rest === `?action=join&campaign=${optInCode}`) {
-      return {pass: true}
-    }
-    return {err: 'Opt in code is wrong'}
-  }
-  return {err: 'URL is wrong'}
-}
-
-const analyzeMobileLink = (str, baseUrl, optInCode) => {
-  if (str.indexOf(baseUrl) === 0) {
-    let rest = str.substr(baseUrl.length);
-    rest = rest[0] === '/' ? rest.substr(1) : rest;
-    const params = baseUrl.indexOf('nordicbet.dk') === -1 ?
-      `?campaign=${optInCode}` : `?modalroute=join-campaign/${optInCode}`;
-    if (rest === params) {
-      return {pass: true}
-    }
-    return {err: 'Opt in code is wrong'}
-  }
-  return {err: 'URL is wrong'}
+const analyzeOptInLink = (str, re) => {
+  return str.match(re) ? {pass:true} : {err: 'Wrong Link'}
 }
 
 const analyzeNativeLink = (link, optInCode, product) => {
@@ -38,7 +16,7 @@ const analyzeNativeLink = (link, optInCode, product) => {
   if (link.ddlShowFeedback !== 'true') {
     return {err: 'Use Show Feedback'}
   }
-  if (product === 'ca' || product === 'lca') {
+  if (product.match(/l?ca/)) {
     if (link.ddlSuccessCTA === "GoToCasinoLobby")  {
       return {pass: true}
     }
@@ -60,18 +38,17 @@ const getOptInResults = (links, settings) => {
   const optInLinks = links.filter(link =>
     link.ddlFunction === 'JoinCampaign' || link.ddlFunction === 'OptinCampaign');
   const results = [];
+  const regExps = data.getRegExps(settings);
   for (let i=0; i<optInLinks.length; i++) {
     const link = optInLinks[i];
     const result = {
-      dsk: analyzeDesktopLink(
+      dsk: analyzeOptInLink(
         link.txtDesktopWebURL.replace(/\s*$/,""),
-        settings.brandUrls.webUrl,
-        settings.optInCode
+        regExps.desk
       ),
-      mob: analyzeMobileLink(
+      mob: analyzeOptInLink(
         link.txtMobileWebURL.replace(/\s*$/,""),
-        settings.brandUrls.mobUrl,
-        settings.optInCode
+        regExps.mob
       ),
       nat: analyzeNativeLink (
         link,
@@ -124,7 +101,7 @@ const getAllElements = rows => {
 
 const analyzeCampaign = (campaign, settings) => {
   settings.language = campaign.campaign_language.toLowerCase();
-  settings.brandUrls = data.getBrandUrls(settings);
+  settings.brandRegExps = data.getRegExps(settings);
   const allElements = getAllElements(campaign.body);
   const linkingElements = getLinkingElements(allElements);
   const links = getLinks(linkingElements);
@@ -183,20 +160,19 @@ const analyzeAll = (campaigns, settings) => {
   return {results, summary};
 };
 
-const getPromiseStack = arr => {
-  const temp = [];
-  for (let i=0; i<arr.length; i++) {
-    const fun = axios.get(arr[i]);
-    temp.push(fun);
+const getPromiseStack = uris => {
+  const prmsStack = [];
+  for (let i=0; i<uris.length; i++) {
+    const fun = axios.get(uris[i]);
+    prmsStack.push(fun);
   }
-  return temp
+  return prmsStack
 };
 
 const getApiUris = campaign => {
   const urls = campaign.campaign_settings.languages.map( item => {
-    if (campaign.campaign_language !== item.lang_title) {
-      return item.data_url
-    }
+    if (campaign.campaign_language !== item.lang_title)
+    return item.data_url
     else return null
   })
   return urls.filter(url => url)
