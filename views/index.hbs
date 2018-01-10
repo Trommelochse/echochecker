@@ -3,9 +3,20 @@
     <form action="analyze" method="get">
       <fieldset>
         <div class="row">
-          <div class="column">
+          <div class="column column-80">
             <label for="echoCampaignId">Echo Campaign ID<span class="error">*</span></label>
             <input type="number" placeholder="i.e. 11395" name="echoCampaignId" id="echoCampaignId">
+          </div>
+          <div class="column">
+            <label for="defaultLanguage">Default language<span class="error"></span></label>
+              <select name="defaultLanguage" id="defaultLanguage">
+              <option value="en">en</option>
+              <option value="sv">sv</option>
+              <option value="no">no</option>
+              <option value="fi">fi</option>
+              <option value="da">da</option>
+              <option value="is">is</option>
+            </select>
           </div>
         </div>
         <div class="row">

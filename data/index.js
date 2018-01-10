@@ -91,7 +91,7 @@ const getRegExps = settings => {
   }
   if (settings.brand === 'nordicbet' && settings.topdomain === '.dk') {
     regExps.desk = new RegExp(`(https:\/\/www\.nordicbet\.dk)` +
-                             `\/(da)?` +
+                             `(\/da)?` +
                              `\/(${productPaths.desk})(?:\/)?` +
                              `(\\?action=join\&campaign=${settings.optInCode}(?=\&|$))`);
   }

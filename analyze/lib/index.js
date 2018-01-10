@@ -61,6 +61,20 @@ const getOptInResults = (links, settings) => {
   return results;
 }
 
+const getOtherLinks = links => {
+  return links.filter(el => el.ddlFunction !== 'JoinCampaign' && el.ddlFunction !== 'OptinCampaign')
+    .reduce((acc, el) => {
+      if (el.ddlFunction) {
+        return acc.concat([el.txtDesktopWebURL, el.txtMobileWebURL])
+      } else {
+        return acc.concat(el.simpleUrl)
+      }
+    }, [])
+    .filter(el => el.trim() !== '')
+    .sort()
+    .reverse()
+}
+
 const getLinks = elements => {
   return elements.map(element => {
     const str = element.settings.hyperlink_url ||
@@ -106,8 +120,10 @@ const analyzeCampaign = (campaign, settings) => {
   const linkingElements = getLinkingElements(allElements);
   const links = getLinks(linkingElements);
   const optInResults = getOptInResults(links, settings);
+  const otherLinks = getOtherLinks(links);
   const result = {
-    optInResults
+    optInResults,
+    otherLinks
   };
   return result
 };
@@ -171,8 +187,14 @@ const getPromiseStack = uris => {
 
 const getApiUris = campaign => {
   const urls = campaign.campaign_settings.languages.map( item => {
-    if (campaign.campaign_language !== item.lang_title)
-    return item.data_url
+    if (campaign.campaign_language !== item.lang_title) {
+      if (item.lang_title.match(/(en|sv|no|fi|da|is)/i)) {
+        console.log(item.lang_title)
+        return item.data_url
+      } else {
+        return null
+      }
+    }
     else return null
   })
   return urls.filter(url => url)

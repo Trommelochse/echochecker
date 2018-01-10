@@ -29,6 +29,23 @@ h3 {
   font-weight: 400;
 }
 
+h6.result-heading {
+  margin: 0;
+  padding: 0.6125rem 1.35rem;
+  background-color: #dadada;
+  color: #656565;
+}
+
+.result-heading i {
+  color: #454545;
+  margin-top: 0.35rem;
+  cursor: pointer;
+}
+
+.result-heading i:hover {
+  color: #006e70;
+}
+
 a {
   color: #006e70;
   transition: none;
@@ -145,6 +162,7 @@ i.icon-big {
 }
 
 .result-container {
+  background-color: #fff;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 1px 1px 0 rgba(0,0,0,0.08);
@@ -173,7 +191,7 @@ table {
 
 table td, table th {
   color: #232323;
-  padding: 1.2rem 1.5rem;
+  padding: 1rem 1.35rem;
   font-weight: 400;
 }
 
@@ -186,7 +204,7 @@ table tr:last-child td {
 }
 
 td:first-child, th:first-child {
-  padding: 1.2rem 1.5rem;
+  padding: 1rem 1.35rem;
 }
 
 .result-table,
@@ -194,6 +212,14 @@ td:first-child, th:first-child {
 .result-warning-table,
 .result-symbol-container {
   background: #fff;
+}
+
+.result-container-inner {
+  overflow: hidden;
+}
+
+.result-container-inner.hidden {
+  height: 0px;
 }
 
 .result-table th {

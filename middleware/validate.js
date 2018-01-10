@@ -1,12 +1,19 @@
 var axios = require('axios');
 
-module.exports = function (req, res, next) {
+module.exports = function validateCampaign (req, res, next) {
   const q = req.query;
   if (q.echoCampaignId && q.optInCode) {
-    const url = `https://${q.subdomain + q.brand + q.topdomain}/api/data/${q.echoCampaignId}`;
+    let url = `https://${q.subdomain + q.brand + q.topdomain}/api/data/${q.echoCampaignId}/${q.defaultLanguage}`;
     axios.get(url)
       .then(response => {
         res.locals.defaultCampaign = response.data;
+        if (response.status != 200) {
+          res.render('error', {
+            message: 'Seems like your inputs were not correct',
+            buttonText: 'Understood!',
+            buttonPath: '/'
+          });
+        }
         next();
       })
       .catch(err => {

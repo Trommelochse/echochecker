@@ -18,7 +18,7 @@ const getResults = function(req, res) {
           campaign_settings.
           languages[0].url.length - 3);
       if (settings.raw) {
-        res.send(campaigns);
+        res.send(results);
       } else {
         res.render('results', results);
       }

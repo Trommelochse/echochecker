@@ -8,44 +8,59 @@
     {{#each results}}
     <div class="result-container">
       <label class="label-result">/{{ language }}/</label>
-      <table class="result-table">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Desktop</th>
-            <th>Mobile</th>
-            <th>Native</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each result.optInResults}}
-          <tr>
-            <td>Opt In Link</td>
-            <td>
-              {{#if dsk.pass}}
+      <h6 class="result-heading">Opt In Links <i class="fa fa-minus float-right toggle-table optin"></i></h6>
+      <div class="result-container-inner optin">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Desktop</th>
+              <th>Mobile</th>
+              <th>Native</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each result.optInResults}}
+            <tr>
+              <td>
+                {{#if dsk.pass}}
                 <i class="fa fa-check success icon-big"></i>
-              {{else}}
+                {{else}}
                 <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{dsk.err}}</span>
-              {{/if}}
-            </td>
-            <td>
-              {{#if mob.pass}}
+                {{/if}}
+              </td>
+              <td>
+                {{#if mob.pass}}
                 <span class="success"><i class="fa fa-check success icon-big"></i></span>
-              {{else}}
+                {{else}}
                 <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{mob.err}}</span>
-              {{/if}}
-            </td>
-            <td>
-              {{#if nat.pass}}
+                {{/if}}
+              </td>
+              <td>
+                {{#if nat.pass}}
                 <span class="success"><i class="fa fa-check success icon-big"></i></span>
-              {{else}}
+                {{else}}
                 <i class="fa fa-exclamation-triangle error" aria-hidden="true"></i> <span class="error">{{nat.err}}</span>
-              {{/if}}
-            </td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
+                {{/if}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <h6 class="result-heading">Other links<i class="fa fa-plus float-right toggle-table links"></i></h6>
+      <div class="result-container-inner links hidden">
+        <table class="result-table">
+          <tbody>
+            {{#each result.otherLinks}}
+            <tr>
+              <td>
+                <a href="{{ this }}" target="_blank" rel="noopener">{{ this }} <i class="fa fa-external-link" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
     </div>
     {{/each}}
   </div>
@@ -69,7 +84,7 @@
         <table class="result-overview-table">
           <tbody>
             <tr>
-              <td>Total Links:</td>
+              <td>Total Optin Links:</td>
               <td>{{ summary.countTotal }}</td>
             </tr>
             <tr>
@@ -100,9 +115,12 @@
   </div>
 </div>
 <div class="row" style="margin-bottom: 3rem;">
-  <div class="column"><a href="/" class="button button-outline">Go back</a></div>
+  <div class="column column-75">
+    <a href="/" class="button button-outline">Go back</a>
+    <input type="button" class="button button-primary float-right button-reload" value="Try again"/>
 </div>
 <script type="text/javascript">
+// sidebar scroll
 const asidePosY = ($('aside').offset()).top;
 $(window).scroll(function() {
   setTimeout(function() {
@@ -113,6 +131,23 @@ $(window).scroll(function() {
     if (scrollTop < asidePosY) {
       $('aside').css('top', 0);
     }
-  }, 10)
+  }, 10);
+});
+// reload
+$('body').on('click','.button-reload', function (ev) {
+  window.location.reload(true);
+  $(this).css('opacity', 0.5);
+});
+// toggle opt in results
+$('.toggle-table').on('click', (ev) => {
+  const target = $(ev.target);
+  if (target.hasClass('optin')) {
+    target.closest('.result-container').find('.result-container-inner.optin').toggleClass('hidden');
+  }
+  else if (target.hasClass('links')) {
+    target.closest('.result-container').find('.result-container-inner.links').toggleClass('hidden');
+  }
+  target.toggleClass('fa-minus');
+  target.toggleClass('fa-plus');
 });
 </script>
